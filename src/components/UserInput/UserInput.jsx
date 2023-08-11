@@ -22,15 +22,23 @@ const UserInput = (props) => {
     setDuration(e.target.value);
   };
 
-  const resetFormHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const userInput = {
+      currentSavings: currentSavings,
+      yearlyContribution: yearlyContribution,
+      expectedReturn: expectedReturn,
+      duration: duration,
+    };
+
+    props.onCalculate(userInput);
+  };
+
+  const resetHandler = () => {
     setCurrentSavings('');
     setYearlyContribution('');
     setExpectedReturn('');
     setDuration('');
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -78,7 +86,7 @@ const UserInput = (props) => {
         </p>
       </div>
       <p className="actions">
-        <button type="reset" className="buttonAlt" onClick={resetFormHandler}>
+        <button type="reset" className="buttonAlt" onClick={resetHandler}>
           Reset
         </button>
         <button type="submit" className="button">
